@@ -97,6 +97,7 @@ public class Player2Movement : MonoBehaviour
         {
             target = collision.gameObject;
             hasBeenHit = true;
+            ScoreVar.p2Hit = true;
         }
 
         if (collision.gameObject.tag == "Floor")
