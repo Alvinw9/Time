@@ -6,6 +6,7 @@ public class minuteHandScript : MonoBehaviour
 {
 
     private Vector3 pivot = new Vector3(0.0f, 0.0f, 0.0f);
+    public float rotationRate = 50.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class minuteHandScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(pivot, Vector3.up, 50 * Time.deltaTime);
+        transform.RotateAround(pivot, Vector3.up, rotationRate * Time.deltaTime);
     }
 
 }
