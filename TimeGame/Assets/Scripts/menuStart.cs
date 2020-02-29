@@ -15,4 +15,8 @@ public class menuStart : MonoBehaviour
         PlayerSet.numPlayers = 1;
         SceneManager.LoadScene("Clock");
     }
+    public void changeMenuScene()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
 }

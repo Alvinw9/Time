@@ -9,7 +9,7 @@ public class timerText : MonoBehaviour
     Text text;
     float startGameTime = 60;
     float gameTimer;
-    private int twoPlayer = 1;
+    private int twoPlayer = PlayerSet.numPlayers;
     float twoPlayerStartGameTime = 0;
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class timerText : MonoBehaviour
         {
             gameTimer = twoPlayerStartGameTime;
         }
-        text.text = "Time: " + gameTimer.ToString("F2");
+        text.text = "Time: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
     }
 
     // Update is called once per frame
@@ -33,15 +33,17 @@ public class timerText : MonoBehaviour
         if (twoPlayer != 1)
         {
             gameTimer -= Time.deltaTime;
-            if (gameTimer == 0)
+            ScoreVar.score += Time.deltaTime;
+            text.text = "Timer: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
+            if (gameTimer <= 0)
             {
                 SceneManager.LoadScene("EndGame");
             }
         } else
         {
             gameTimer += Time.deltaTime;
+            text.text = "Timer: " + gameTimer.ToString("F2");
         }
-        text.text = "Timer: " + gameTimer.ToString("F2");
 
     }
 
