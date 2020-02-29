@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
     bool rightHeld = false;
     bool leftHeld = false;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private int twoPlayer = 9;
 
     GameObject target;
-    Player2Movement enemy;
+    PlayerMovement enemy;
 
     float xVal, yVal, zVal;
 
@@ -48,11 +48,11 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y + 0.12f, transform.position.z);
         }
 
-        rightHeld = Input.GetKey(KeyCode.D) ? true : false;
-        leftHeld = Input.GetKey(KeyCode.A) ? true : false;
-        upHeld = Input.GetKey(KeyCode.W) ? true : false;
-        downHeld = Input.GetKey(KeyCode.S) ? true : false;
-        if(Input.GetKeyDown(KeyCode.Space) && onFloor)
+        rightHeld = Input.GetKey(KeyCode.RightArrow) ? true : false;
+        leftHeld = Input.GetKey(KeyCode.LeftArrow) ? true : false;
+        upHeld = Input.GetKey(KeyCode.UpArrow) ? true : false;
+        downHeld = Input.GetKey(KeyCode.DownArrow) ? true : false;
+        if (Input.GetKeyDown(KeyCode.RightShift) && onFloor)
         {
             jump = true;
         }
@@ -69,10 +69,10 @@ public class PlayerMovement : MonoBehaviour
         upVal = upHeld ? movementSpeed : 0.0f;
         downVal = downHeld ? movementSpeed : 0.0f;
 
-        if(jump)
+        if (jump)
         {
             rb.AddForce(Vector3.up * 15, ForceMode.VelocityChange);
-            if(jumpTime == 8)
+            if (jumpTime == 8)
             {
                 jumpTime = 0;
                 jump = false;
@@ -80,11 +80,11 @@ public class PlayerMovement : MonoBehaviour
             jumpTime++;
         }
 
-        if(!onFloor)
+        if (!onFloor)
         {
             rb.AddForce(Vector3.down * 4, ForceMode.VelocityChange);
         }
-        
+
         float xVal = rightVal - leftVal;
         float zVal = upVal - downVal;
 
@@ -135,11 +135,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void slowEnemy()
     {
-        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player2");
-        
+        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player");
+
         if (enemyObj != null)
         {
-            enemy = enemyObj.GetComponent<Player2Movement>();
+            enemy = enemyObj.GetComponent<PlayerMovement>();
             enemy.movementSpeed = 1.5f;
             StartCoroutine(debuffDuration());
         }
@@ -148,11 +148,11 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator debuffDuration()
     {
         yield return new WaitForSeconds(5.0f);
-        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player2");
+        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player");
 
         if (enemyObj != null)
         {
-            enemy = enemyObj.GetComponent<Player2Movement>();
+            enemy = enemyObj.GetComponent<PlayerMovement>();
             enemy.movementSpeed = 2.0f;
         }
     }
