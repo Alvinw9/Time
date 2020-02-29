@@ -6,6 +6,8 @@ public class SpawnScript : MonoBehaviour
 {
 
     public Coin coin;
+    public bool shouldSpawn = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +18,16 @@ public class SpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (shouldSpawn)
+        {
+            spawnNewCoin();
+            shouldSpawn = false;
+        }
     }
 
-    void spawnNewCoin()
+    public void spawnNewCoin()
     {
-        Vector3 originPos = spawnCircle(transform.position, 3.0f, 30.0f);
+        Vector3 originPos = spawnCircle(transform.position, 3.0f, Random.value * 360.0f);
         Coin newCoin = Instantiate(coin, originPos, Quaternion.identity);
     }
 
@@ -30,7 +36,7 @@ public class SpawnScript : MonoBehaviour
         Vector3 pos;
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
         pos.y = center.y + 1.6f;
-        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad); ;
+        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         return pos;
     }
 
