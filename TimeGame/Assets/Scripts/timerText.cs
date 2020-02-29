@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class timerText : MonoBehaviour
 {
@@ -14,18 +15,19 @@ public class timerText : MonoBehaviour
     {
         text = GetComponent<Text>();
         gameTimer = startGameTime;
-        text.text = "Time: " + gameTimer.ToString("F2");
+        text.text = "Time: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
     }
 
     // Update is called once per frame
     void Update()
     {
         gameTimer -= Time.deltaTime;
-        text.text = "Timer: " + gameTimer.ToString("F2");
+        ScoreVar.score += Time.deltaTime;
+        text.text = "Timer: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
 
-        if(gameTimer == 0)
+        if(gameTimer <= 0)
         {
-
+            SceneManager.LoadScene("EndGame");
         }
 
     }
@@ -34,4 +36,5 @@ public class timerText : MonoBehaviour
     {
         gameTimer += change;
     }
+
 }
