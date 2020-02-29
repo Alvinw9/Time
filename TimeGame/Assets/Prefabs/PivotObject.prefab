@@ -45,3 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin: {fileID: 3581859749110770103, guid: 9eb17f7fefab78049b4d0b299cf92eca, type: 3}
   shouldSpawn: 0
+  player1: {fileID: 6308882655227136866, guid: 5c57bfcbedd3f6147ba0026a81959093, type: 3}
+  player2: {fileID: -1526953799870396527, guid: cb479d01e0054944fa93ea973874bb97,
+    type: 3}

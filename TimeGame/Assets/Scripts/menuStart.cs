@@ -5,8 +5,18 @@ using UnityEngine;
 
 public class menuStart : MonoBehaviour
 {
-   public void changeMenuScene()
+   public void changeMenuSceneP1()
     {
+        PlayerSet.numPlayers = 0;
         SceneManager.LoadScene("Clock");
+    }
+    public void changeMenuSceneP2()
+    {
+        PlayerSet.numPlayers = 1;
+        SceneManager.LoadScene("Clock");
+    }
+    public void changeMenuScene()
+    {
+        SceneManager.LoadScene("StartScreen");
     }
 }

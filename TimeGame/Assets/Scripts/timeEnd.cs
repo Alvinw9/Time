@@ -11,7 +11,7 @@ public class timeEnd : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        text.text = "Total Time: " + ScoreVar.score;
+        text.text = "Total Time: " + ScoreVar.score.ToString("F2");
     }
 
     // Update is called once per frame

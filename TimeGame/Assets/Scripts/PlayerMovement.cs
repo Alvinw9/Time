@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float jumpTime = 0;
     public float speed = 10.0f;
     public float movementSpeed = 2.0f;
-    private int twoPlayer = 1;
+    private int twoPlayer = PlayerSet.numPlayers;
 
     GameObject target;
     Player2Movement enemy;
@@ -56,10 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jump = true;
         }
-        /*else
-        {
-            jump = false;
-        }*/
+
     }
 
     private void FixedUpdate()
@@ -71,8 +68,19 @@ public class PlayerMovement : MonoBehaviour
 
         if(jump)
         {
-            rb.AddForce(Vector3.up * 15, ForceMode.VelocityChange);
-            if(jumpTime == 8)
+            if(jumpTime < 5)
+            {
+                rb.AddForce(Vector3.up * 15, ForceMode.VelocityChange);
+            }
+            else if(jumpTime < 9)
+            {
+                rb.AddForce(Vector3.up * 12, ForceMode.VelocityChange);
+            }
+            else if(jumpTime < 12)
+            {
+                rb.AddForce(Vector3.up * 9, ForceMode.VelocityChange);
+            }
+            else
             {
                 jumpTime = 0;
                 jump = false;
