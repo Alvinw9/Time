@@ -7,10 +7,13 @@ using UnityEngine.SceneManagement;
 public class timerText : MonoBehaviour
 {
     Text text;
-    float startGameTime = 60;
+    float increaseSpeedTimer = 0.0f;
+    float startGameTime = 60.0f;
     float gameTimer;
     private int twoPlayer = PlayerSet.numPlayers;
-    float twoPlayerStartGameTime = 0;
+    float twoPlayerStartGameTime = 0.0f;
+    minuteHandScript minute;
+    HourHandScript hour;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,28 @@ public class timerText : MonoBehaviour
         {
             gameTimer += Time.deltaTime;
             text.text = "Timer: " + gameTimer.ToString("F2");
+        }
+
+        increaseSpeedTimer += Time.deltaTime;
+
+        if (increaseSpeedTimer >= 10.0f)
+        {
+            GameObject enemyObj = GameObject.FindGameObjectWithTag("MinuteHand");
+
+            if (enemyObj != null)
+            {
+                minute = enemyObj.GetComponent<minuteHandScript>();
+                minute.rotationRate += 15.0f;
+            }
+
+            GameObject enemyObj2 = GameObject.FindGameObjectWithTag("HourHand");
+
+            if (enemyObj2 != null)
+            {
+                hour = enemyObj2.GetComponent<HourHandScript>();
+                hour.rotationRate += 15.0f;
+            }
+            increaseSpeedTimer = 0.0f;
         }
 
     }
