@@ -9,26 +9,39 @@ public class timerText : MonoBehaviour
     Text text;
     float startGameTime = 60;
     float gameTimer;
+    private int twoPlayer = 1;
+    float twoPlayerStartGameTime = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<Text>();
-        gameTimer = startGameTime;
-        text.text = "Time: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
+
+        if (twoPlayer != 1)
+        {
+            gameTimer = startGameTime;
+        } else
+        {
+            gameTimer = twoPlayerStartGameTime;
+        }
+        text.text = "Time: " + gameTimer.ToString("F2");
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameTimer -= Time.deltaTime;
-        ScoreVar.score += Time.deltaTime;
-        text.text = "Timer: " + gameTimer.ToString("F2") + '\n' + "Total Time: " + ScoreVar.score.ToString("F2");
-
-        if(gameTimer <= 0)
+        if (twoPlayer != 1)
         {
-            SceneManager.LoadScene("EndGame");
+            gameTimer -= Time.deltaTime;
+            if (gameTimer == 0)
+            {
+                SceneManager.LoadScene("EndGame");
+            }
+        } else
+        {
+            gameTimer += Time.deltaTime;
         }
+        text.text = "Timer: " + gameTimer.ToString("F2");
 
     }
 
@@ -36,5 +49,4 @@ public class timerText : MonoBehaviour
     {
         gameTimer += change;
     }
-
 }
