@@ -21,6 +21,8 @@ public class timeEnd : MonoBehaviour
             text.text = "Player 1: " + ScoreVar.p1Score.ToString("F2") + '\n' + "Player 2: " + ScoreVar.p2Score.ToString("F2");
             ScoreVar.p1Score = 0;
             ScoreVar.p2Score = 0;
+            ScoreVar.p1Hit = false;
+            ScoreVar.p2Hit = false;
         }
     }
 

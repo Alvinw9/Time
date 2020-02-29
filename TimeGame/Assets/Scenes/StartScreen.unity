@@ -444,7 +444,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Time?
+  m_Text: Time Sweeper
 --- !u!222 &689625905
 CanvasRenderer:
   m_ObjectHideFlags: 0
