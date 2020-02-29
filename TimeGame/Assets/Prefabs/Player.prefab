@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8441c98bf5c051140a1398d485de1cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newCoin: {fileID: -529701134990404643, guid: 22824aec60386094cbbfa9816c33c812, type: 3}

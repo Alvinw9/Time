@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb = null;
 
+    public SpawnScript newCoin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +95,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             onFloor = true;
+        }
+
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            newCoin.spawnNewCoin();
         }
     }
 
