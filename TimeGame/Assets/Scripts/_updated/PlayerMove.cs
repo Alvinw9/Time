@@ -7,12 +7,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public InputKeys keys;
+
     bool rightHeld = false;
     bool leftHeld = false;
     bool upHeld = false;
     bool downHeld = false;
     bool onFloor = false;
-    bool hasBeenHit = false;
+
+    bool stunned = false;
+    float stunTimer = 0f;
 
     bool jump = false;
     bool jumpHold = false;
@@ -20,12 +24,12 @@ public class PlayerMove : MonoBehaviour
 
     public float hitForce = 10.0f;
     public float movementSpeed = 2.0f;
+    float initialSpeed = 0f;
     public float jumpSpeed = 5f;
 
     private int twoPlayer = 1;
 
-    GameObject target;
-    Player2Movement enemy;
+    PlayerMove enemy;
 
     float xVal, yVal, zVal;
 
@@ -41,37 +45,42 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        initialSpeed = movementSpeed;
+
+        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player2");
+        if (enemyObj)
+        {
+            enemy = enemyObj.GetComponent<PlayerMove>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (hasBeenHit)
+        stunTimer -= Time.deltaTime;
+        if (stunned && stunTimer <= 0f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, -hitForce * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, transform.position.y + 0.12f, transform.position.z);
+            stunned = false;
         }
 
-        KeyCode jumpKey = KeyCode.Space;
-
         // Check inputs
-        rightHeld = Input.GetKey(KeyCode.D) ? true : false;
-        leftHeld = Input.GetKey(KeyCode.A) ? true : false;
-        upHeld = Input.GetKey(KeyCode.W) ? true : false;
-        downHeld = Input.GetKey(KeyCode.S) ? true : false;
+        rightHeld = Input.GetKey(keys.right) ? true : false;
+        leftHeld = Input.GetKey(keys.left) ? true : false;
+        upHeld = Input.GetKey(keys.up) ? true : false;
+        downHeld = Input.GetKey(keys.down) ? true : false;
 
-        if(Input.GetKeyDown(jumpKey) && onFloor)
+        if(Input.GetKeyDown(keys.jump) && onFloor)
         {
             jump = true;
             jumpHold = true;
             jumpTimer = 0.6f;
         }
-        if (Input.GetKey(jumpKey))
+        if (Input.GetKey(keys.jump))
         {
             jumpHold = true;
         }
-        if (Input.GetKeyUp(jumpKey))
+        if (Input.GetKeyUp(keys.jump))
         {
             jumpHold = false;
         }
@@ -80,6 +89,11 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (stunned)
+        {
+            return;
+        }
+
         leftVal = leftHeld ? 1f : 0.0f;
         rightVal = rightHeld ? 1f : 0.0f;
         upVal = upHeld ? 1f : 0.0f;
@@ -102,16 +116,21 @@ public class PlayerMove : MonoBehaviour
         float zVal = upVal - downVal;
 
         Vector3 yOnly = new Vector3(0f, rb.velocity.y, 0f);
+        Vector3 moveDir = new Vector3(xVal, 0f, zVal).normalized * movementSpeed;
 
-        rb.velocity = (new Vector3(xVal, 0f, zVal).normalized * movementSpeed) + yOnly;
+        if(moveDir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+        }
+
+        rb.velocity = moveDir + yOnly;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "MinuteHand" || collision.gameObject.tag == "HourHand")
+        if (collision.gameObject.tag == "MinuteHand" || collision.gameObject.tag == "HourHand" || collision.gameObject.tag == "Hit")
         {
-            target = collision.gameObject;
-            hasBeenHit = true;
+            HitBack(collision.contacts[0].normal);
         }
 
         if (collision.gameObject.tag == "Floor")
@@ -123,7 +142,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (twoPlayer == 1)
             {
-                slowEnemy();
+                SlowEnemy();
             }
             else
             {
@@ -148,28 +167,37 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    private void slowEnemy()
+    public void HitBack(Vector3 direction)
     {
-        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player2");
-        
-        if (enemyObj != null)
+        rb.AddForce((Vector3.up + direction) * 4f, ForceMode.Impulse);
+        onFloor = false;
+
+        stunned = true;
+        stunTimer = 1f;
+    }
+
+    private void SlowEnemy()
+    {
+        if (enemy)
         {
-            enemy = enemyObj.GetComponent<Player2Movement>();
-            enemy.movementSpeed = 1.5f;
-            StartCoroutine(debuffDuration());
+            enemy.Slow();
         }
     }
 
-    IEnumerator debuffDuration()
+    public void Slow()
     {
-        yield return new WaitForSeconds(5.0f);
-        GameObject enemyObj = GameObject.FindGameObjectWithTag("Player2");
+        movementSpeed = initialSpeed / 2f;
+    }
 
-        if (enemyObj != null)
-        {
-            enemy = enemyObj.GetComponent<Player2Movement>();
-            enemy.movementSpeed = 2.0f;
-        }
+    [System.Serializable]
+    public class InputKeys
+    {
+        public KeyCode up = KeyCode.W;
+        public KeyCode down = KeyCode.S;
+        public KeyCode left = KeyCode.A;
+        public KeyCode right = KeyCode.D;
+
+        public KeyCode jump = KeyCode.Space;
     }
 }
 
