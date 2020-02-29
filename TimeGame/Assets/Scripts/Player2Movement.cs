@@ -15,7 +15,7 @@ public class Player2Movement : MonoBehaviour
     float jumpTime = 0;
     public float speed = 10.0f;
     public float movementSpeed = 2.0f;
-    private int twoPlayer = 9;
+    private int twoPlayer = 1;
 
     GameObject target;
     PlayerMovement enemy;
@@ -106,7 +106,7 @@ public class Player2Movement : MonoBehaviour
 
         if (collision.gameObject.tag == "Coin")
         {
-            if (twoPlayer == 9)
+            if (twoPlayer == 1)
             {
                 slowEnemy();
             }
