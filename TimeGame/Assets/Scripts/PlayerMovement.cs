@@ -9,9 +9,13 @@ public class PlayerMovement : MonoBehaviour
     bool upHeld = false;
     bool downHeld = false;
     bool onFloor = false;
+    bool hasBeenHit = false;
 
     bool jump = false;
     float jumpTime = 0;
+    float speed = 10.0f;
+
+    GameObject target;
 
     float xVal, yVal, zVal;
 
@@ -28,6 +32,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (hasBeenHit)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, -speed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.12f, transform.position.z);
+        }
+
         rightHeld = Input.GetKey(KeyCode.D) ? true : false;
         leftHeld = Input.GetKey(KeyCode.A) ? true : false;
         upHeld = Input.GetKey(KeyCode.W) ? true : false;
@@ -71,17 +82,28 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(xVal, 0, zVal);
     }
 
-    void OnCollisionEnter(Collision floor)
+    void OnCollisionEnter(Collision collision)
     {
-        if (floor.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "MinuteHand")
+        {
+            target = collision.gameObject;
+            hasBeenHit = true;
+        }
+
+        if (collision.gameObject.tag == "Floor")
         {
             onFloor = true;
         }
     }
 
-    private void OnCollisionExit(Collision floor)
+    private void OnCollisionExit(Collision collision)
     {
-       if(floor.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "MinuteHand")
+        {
+            //hasBeenHit = false;
+        }
+
+        if (collision.gameObject.tag == "Floor")
         {
             onFloor = false;
         }
