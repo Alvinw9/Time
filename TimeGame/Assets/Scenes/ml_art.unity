@@ -1257,7 +1257,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172668733937110}
-  m_Mesh: {fileID: 6889782551597527451, guid: 6e911c616b191484fa686a8cacf76519, type: 3}
+  m_Mesh: {fileID: 2791369629923464968, guid: 0ba3d45dfa9c79347aa529b1e281d559, type: 3}
 --- !u!33 &4297341594268153196
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1274,7 +1274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8296172668733937110}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.75, y: 0.68, z: -1.232}
+  m_LocalPosition: {x: -2.75, y: 0.237, z: -1.232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5113907567148535642}
@@ -1289,7 +1289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8116443166410079561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: -0, z: -0.039}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 5006512735796996037}
@@ -1576,7 +1576,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 1
   m_Direction: 2
-  m_Center: {x: 0, y: 0.000000044703476, z: 0.014818741}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!33 &8694888141447160687
 MeshFilter:
   m_ObjectHideFlags: 0
