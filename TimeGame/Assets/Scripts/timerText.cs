@@ -30,7 +30,7 @@ public class timerText : MonoBehaviour
 
     }
 
-    void changeTime(float change)
+    public void changeTime(float change)
     {
         gameTimer += change;
     }

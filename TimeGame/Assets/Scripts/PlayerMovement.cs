@@ -24,11 +24,15 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb = null;
 
     public SpawnScript newCoin;
+    public GameObject time;
+    public timerText timer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        time = GameObject.FindGameObjectWithTag("Timer");
+        timer = time.GetComponent<timerText>();
     }
 
     // Update is called once per frame
@@ -99,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Coin")
         {
+            timer.changeTime(5.0f);
             Destroy(collision.gameObject);
             newCoin.spawnNewCoin();
         }
