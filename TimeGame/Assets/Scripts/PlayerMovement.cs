@@ -71,8 +71,19 @@ public class PlayerMovement : MonoBehaviour
 
         if(jump)
         {
-            rb.AddForce(Vector3.up * 15, ForceMode.VelocityChange);
-            if(jumpTime == 8)
+            if(jumpTime < 5)
+            {
+                rb.AddForce(Vector3.up * 15, ForceMode.VelocityChange);
+            }
+            else if(jumpTime < 9)
+            {
+                rb.AddForce(Vector3.up * 12, ForceMode.VelocityChange);
+            }
+            else if(jumpTime < 12)
+            {
+                rb.AddForce(Vector3.up * 9, ForceMode.VelocityChange);
+            }
+            else
             {
                 jumpTime = 0;
                 jump = false;
