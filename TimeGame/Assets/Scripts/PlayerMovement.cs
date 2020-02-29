@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "MinuteHand")
+        if (collision.gameObject.tag == "MinuteHand" || collision.gameObject.tag == "HourHand")
         {
             target = collision.gameObject;
             hasBeenHit = true;
