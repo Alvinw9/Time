@@ -5,4 +5,6 @@ using UnityEngine;
 public static class ScoreVar
 {
     public static float score;
+    public static int p1Score;
+    public static int p2Score;
 }

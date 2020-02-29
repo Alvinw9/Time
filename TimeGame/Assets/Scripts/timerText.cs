@@ -42,7 +42,11 @@ public class timerText : MonoBehaviour
         } else
         {
             gameTimer += Time.deltaTime;
-            text.text = "Timer: " + gameTimer.ToString("F2");
+            text.text = "Timer: " + gameTimer.ToString("F2") + '\n' + "Player 1: " + ScoreVar.p1Score.ToString("F2") + '\n' + "Player 2: " + ScoreVar.p2Score.ToString("F2");
+            if(gameTimer >= 20)
+            {
+                SceneManager.LoadScene("EndGame");
+            }
         }
 
     }

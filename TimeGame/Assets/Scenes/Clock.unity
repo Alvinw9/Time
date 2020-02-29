@@ -171,7 +171,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 66
+  field of view: 29.180262
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -444,17 +444,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8678949488407608279, guid: 22824aec60386094cbbfa9816c33c812,
-        type: 3}
-      propertyPath: m_Name
-      value: PivotObject
-      objectReference: {fileID: 0}
     - target: {fileID: -529701134990404643, guid: 22824aec60386094cbbfa9816c33c812,
         type: 3}
       propertyPath: coin
       value: 
       objectReference: {fileID: 3581859749110770103, guid: 9eb17f7fefab78049b4d0b299cf92eca,
         type: 3}
+    - target: {fileID: 8678949488407608279, guid: 22824aec60386094cbbfa9816c33c812,
+        type: 3}
+      propertyPath: m_Name
+      value: PivotObject
+      objectReference: {fileID: 0}
     - target: {fileID: 8678949488407608276, guid: 22824aec60386094cbbfa9816c33c812,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -841,17 +841,17 @@ PrefabInstance:
     - target: {fileID: 8288474085546429960, guid: de3ea416ea0421e458569481fad4b134,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 117
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8288474085546429960, guid: de3ea416ea0421e458569481fad4b134,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -212.8
+      value: -209
       objectReference: {fileID: 0}
     - target: {fileID: 8288474085546429960, guid: de3ea416ea0421e458569481fad4b134,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 224.3
+      value: 161
       objectReference: {fileID: 0}
     - target: {fileID: 8288474085546429960, guid: de3ea416ea0421e458569481fad4b134,
         type: 3}

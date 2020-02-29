@@ -108,6 +108,7 @@ public class Player2Movement : MonoBehaviour
         {
             if (twoPlayer == 1)
             {
+                ScoreVar.p2Score++;
                 slowEnemy();
             }
             else
