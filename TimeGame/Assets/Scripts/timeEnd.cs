@@ -13,16 +13,14 @@ public class timeEnd : MonoBehaviour
         text = GetComponent<Text>();
         if (PlayerSet.numPlayers == 0)
         {
-            text.text = "Total Time: " + ScoreVar.score.ToString("F2");
-            ScoreVar.score = 0;
+            text.text = "FINAL SCORE: " + ScoreVar.p1Score;
+            ScoreVar.p1Score = 0;
         }
         else
         {
-            text.text = "Player 1: " + ScoreVar.p1Score.ToString("F2") + '\n' + "Player 2: " + ScoreVar.p2Score.ToString("F2");
+            text.text = "Player 1: " + ScoreVar.p1Score.ToString() + '\n' + "Player 2: " + ScoreVar.p2Score.ToString();
             ScoreVar.p1Score = 0;
             ScoreVar.p2Score = 0;
-            ScoreVar.p1Hit = false;
-            ScoreVar.p2Hit = false;
         }
     }
 

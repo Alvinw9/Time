@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 5067d707860b07445aa53d625408029a
   - enabled: 1
-    path: Assets/Scenes/Clock.unity
-    guid: aa6c95e21ba107c49969d6e18730bdc1
+    path: Assets/Scenes/final_game.unity
+    guid: b89fad8cdd95ea54aa5e682af3f3429d
   - enabled: 1
     path: Assets/Scenes/EndGame.unity
     guid: b900480f8de31d744a0cfc4acfd2c3d3

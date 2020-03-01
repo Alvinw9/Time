@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
 {
     public InputKeys keys;
 
+    public int id = 1;
+
     bool rightHeld = false;
     bool leftHeld = false;
     bool upHeld = false;
@@ -29,8 +31,6 @@ public class PlayerMove : MonoBehaviour
 
     public Animator anim;
 
-    private int twoPlayer = 1;
-
     PlayerMove enemy;
 
     float xVal, yVal, zVal;
@@ -38,10 +38,6 @@ public class PlayerMove : MonoBehaviour
     float leftVal, rightVal, upVal, downVal = 0.0f;
 
     Rigidbody rb = null;
-
-    public SpawnScript newCoin;
-
-    public timerText timer;
 
     // Start is called before the first frame update
     void Start()
@@ -131,6 +127,11 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
 
+        if (!onFloor)
+        {
+            moveDir *= 1.1f;
+        }
+
         rb.velocity = moveDir + yOnly;
 
         if (anim)
@@ -159,16 +160,26 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.tag == "Coin")
         {
-            if (twoPlayer == 1)
+            if (id <= 1)
+            {
+                ScoreVar.p1Score++;
+            } else
+            {
+                ScoreVar.p2Score++;
+            }
+
+            if (PlayerSet.numPlayers > 1)
             {
                 SlowEnemy();
             }
             else
             {
-                timer.changeTime(5.0f);
+                GameManager.instance.TimeIncrease(5.0f);
             }
+
             Destroy(collision.gameObject);
-            newCoin.spawnNewCoin();
+
+            GameManager.instance.NewCoin();
         }
     }
 
@@ -194,6 +205,11 @@ public class PlayerMove : MonoBehaviour
         anim.ResetTrigger("ground");
         anim.SetTrigger("hurt");
         anim.SetBool("stunned", true);
+
+        if (PlayerSet.numPlayers <= 1)
+        {
+            GameManager.instance.TimeDecrease(5.0f);
+        }
 
         stunned = true;
         stunTimer = 1f;

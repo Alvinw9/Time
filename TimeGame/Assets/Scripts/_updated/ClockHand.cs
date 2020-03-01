@@ -28,4 +28,12 @@ public class ClockHand : MonoBehaviour
         transform.RotateAround(worldPivot, Vector3.up, speed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Increases rotation speed.
+    /// </summary>
+    /// <param name="amt">The increase amount.</param>
+    public void IncreaseSpeed(float amt)
+    {
+        speed += amt;
+    }
 }

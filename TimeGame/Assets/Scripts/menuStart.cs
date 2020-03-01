@@ -7,13 +7,13 @@ public class menuStart : MonoBehaviour
 {
    public void changeMenuSceneP1()
     {
-        PlayerSet.numPlayers = 0;
-        SceneManager.LoadScene("Clock");
+        PlayerSet.numPlayers = 1;
+        SceneManager.LoadScene("final_game");
     }
     public void changeMenuSceneP2()
     {
-        PlayerSet.numPlayers = 1;
-        SceneManager.LoadScene("Clock");
+        PlayerSet.numPlayers = 2;
+        SceneManager.LoadScene("final_game");
     }
     public void changeMenuScene()
     {

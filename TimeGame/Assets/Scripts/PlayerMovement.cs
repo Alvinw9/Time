@@ -28,14 +28,14 @@ public class PlayerMovement : MonoBehaviour
 
     public SpawnScript newCoin;
     public GameObject time;
-    public timerText timer;
+    //public timerText timer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         time = GameObject.FindGameObjectWithTag("Timer");
-        timer = time.GetComponent<timerText>();
+        //timer = time.GetComponent<timerText>();
     }
 
     // Update is called once per frame
@@ -105,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
         {
             target = collision.gameObject;
             hasBeenHit = true;
-            ScoreVar.p1Hit = true;
         }
 
         if (collision.gameObject.tag == "Floor")
@@ -122,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                timer.changeTime(5.0f);
+                GameManager.instance.TimeIncrease(5.0f);
             }
             Destroy(collision.gameObject);
             newCoin.spawnNewCoin();
