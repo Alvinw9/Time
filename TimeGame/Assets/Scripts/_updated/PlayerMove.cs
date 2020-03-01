@@ -27,6 +27,8 @@ public class PlayerMove : MonoBehaviour
     float initialSpeed = 0f;
     public float jumpSpeed = 5f;
 
+    public Animator anim;
+
     private int twoPlayer = 1;
 
     PlayerMove enemy;
@@ -84,7 +86,6 @@ public class PlayerMove : MonoBehaviour
         {
             jumpHold = false;
         }
-
     }
 
     private void FixedUpdate()
@@ -110,6 +111,13 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(Vector3.up * jumpSpeed * 0.9f, ForceMode.Impulse);
             jump = false;
             onFloor = false;
+
+            if (anim)
+            {
+                anim.SetBool("grounded", onFloor);
+                anim.ResetTrigger("ground");
+                anim.SetTrigger("jump");
+            }
         }
         
         float xVal = rightVal - leftVal;
@@ -124,6 +132,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         rb.velocity = moveDir + yOnly;
+
+        if (anim)
+        {
+            anim.SetFloat("speed", moveDir.magnitude);
+            anim.SetBool("grounded", onFloor);
+            anim.SetBool("stunned", stunned);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -133,8 +148,12 @@ public class PlayerMove : MonoBehaviour
             HitBack(collision.contacts[0].normal);
         }
 
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" && !onFloor)
         {
+            if (anim)
+            {
+                anim.SetTrigger("ground");
+            }
             onFloor = true;
         }
 
@@ -171,6 +190,10 @@ public class PlayerMove : MonoBehaviour
     {
         rb.AddForce((Vector3.up + direction) * 4f, ForceMode.Impulse);
         onFloor = false;
+
+        anim.ResetTrigger("ground");
+        anim.SetTrigger("hurt");
+        anim.SetBool("stunned", true);
 
         stunned = true;
         stunTimer = 1f;

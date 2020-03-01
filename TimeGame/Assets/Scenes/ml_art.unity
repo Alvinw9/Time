@@ -190,7 +190,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -209,7 +209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &638720125
 GameObject:
@@ -680,7 +680,7 @@ Transform:
   m_Children:
   - {fileID: 808235920}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674785918
 GameObject:
@@ -1382,7 +1382,7 @@ Transform:
   - {fileID: 5113907567148535642}
   - {fileID: 1448996137971173911}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5113907567148535642
 Transform:
@@ -1650,6 +1650,7 @@ MonoBehaviour:
   hitForce: 10
   movementSpeed: 3
   jumpSpeed: 5
+  anim: {fileID: 8832083949875095405}
   newCoin: {fileID: 0}
   timer: {fileID: 0}
 --- !u!136 &8296172668733937113
@@ -1715,10 +1716,10 @@ Animator:
   m_GameObject: {fileID: 2468121681013094404}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0ba3d45dfa9c79347aa529b1e281d559, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
+  m_Controller: {fileID: 9100000, guid: 2b817903986798640bbc8b77e6fe38f1, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 0
