@@ -97,6 +97,7 @@ public class Player2Movement : MonoBehaviour
         {
             target = collision.gameObject;
             hasBeenHit = true;
+            ScoreVar.p2Hit = true;
         }
 
         if (collision.gameObject.tag == "Floor")
@@ -108,6 +109,7 @@ public class Player2Movement : MonoBehaviour
         {
             if (twoPlayer == 1)
             {
+                ScoreVar.p2Score++;
                 slowEnemy();
             }
             else
