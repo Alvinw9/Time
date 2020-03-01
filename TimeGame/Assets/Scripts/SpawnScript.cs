@@ -15,12 +15,12 @@ public class SpawnScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(delayCoinSpawn());
-        /*PlayerMovement newPlayer1 = Instantiate(player1, new Vector3(1.0f, 1.5f, -2.0f), Quaternion.identity);
+        //PlayerMovement newPlayer1 = Instantiate(player1, new Vector3(1.0f, 1.5f, -2.0f), Quaternion.identity);
 
-        if (twoPlayer == 1)
+        if (twoPlayer <= 1)
         {
-            Player2Movement newPlayer2 = Instantiate(player2, new Vector3(5.5f, 1.5f, -4.0f), Quaternion.identity);
-        }*/
+            player2.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
