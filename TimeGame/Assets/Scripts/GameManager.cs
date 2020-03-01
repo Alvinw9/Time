@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public SpawnScript spawner;
     public ClockHand[] clockHands;
     public GameObject soundPrefab;
+    public GameObject fxPrefab;
 
     float increaseSpeedTimer = 0.0f;
 
@@ -43,9 +45,17 @@ public class GameManager : MonoBehaviour
         {
             foreach (ClockHand hand in clockHands)
             {
-                hand.IncreaseSpeed(5.0f);
+                hand.IncreaseSpeed(15.0f * PlayerSet.numPlayers);
             }
+            GetComponent<AudioSource>().pitch += 0.1f;
             increaseSpeedTimer = 0.0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerSet.numPlayers = 1;
+            ScoreVar.Reset();
+            SceneManager.LoadScene("StartScreen");
         }
     }
 
@@ -67,13 +77,19 @@ public class GameManager : MonoBehaviour
         spawner.spawnNewCoin();
     }
 
+    public void FX(Vector3 pos)
+    {
+        GameObject fxObj = (GameObject)Instantiate(fxPrefab, pos, Quaternion.identity);
+        if (GameObject.Find("_fx")) { fxObj.transform.parent = GameObject.Find("_fx").transform; }
+    }
+
     //******** SOUND
 
     public void PlaySingle(string soundName)
     {
         if (soundName == "") { return; }
         GameObject fxObj = (GameObject)Instantiate(soundPrefab, Vector3.zero, Quaternion.identity);
-        if (GameObject.Find("_fx")) { fxObj.transform.parent = GameObject.Find("_effects").transform; }
+        if (GameObject.Find("_fx")) { fxObj.transform.parent = GameObject.Find("_fx").transform; }
 
         AudioSource asource = fxObj.GetComponent<AudioSource>();
         AudioClip a = (AudioClip)Resources.Load(soundName);

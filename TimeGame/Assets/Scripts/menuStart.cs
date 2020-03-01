@@ -17,6 +17,7 @@ public class menuStart : MonoBehaviour
     }
     public void changeMenuScene()
     {
+        ScoreVar.Reset();
         SceneManager.LoadScene("StartScreen");
     }
 }

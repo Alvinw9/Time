@@ -11,20 +11,15 @@ public class Timer : MonoBehaviour
     float gameTimer;
     private int twoPlayer = PlayerSet.numPlayers;
 
-    float twoPlayerStartGameTime = 0.0f;
+    //float twoPlayerStartGameTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         textObj = GetComponent<Text>();
 
-        if (twoPlayer != 1)
-        {
-            gameTimer = startGameTime;
-        } else
-        {
-            gameTimer = twoPlayerStartGameTime;
-        }
+        gameTimer = startGameTime;
+
         textObj.text = "Time: " + gameTimer.ToString("F2") + '\n' + "P1: " + ScoreVar.p1Score;
     }
 

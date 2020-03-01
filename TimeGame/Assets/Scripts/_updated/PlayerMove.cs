@@ -108,6 +108,7 @@ public class PlayerMove : MonoBehaviour
             jump = false;
             onFloor = false;
 
+            GameManager.instance.PlaySingle("Jump");
             if (anim)
             {
                 anim.SetBool("grounded", onFloor);
@@ -146,7 +147,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "MinuteHand" || collision.gameObject.tag == "HourHand" || collision.gameObject.tag == "Hit")
         {
-            HitBack(collision.contacts[0].normal);
+            Vector3 x = transform.position - Vector3.zero;
+            HitBack(x.normalized);
         }
 
         if (collision.gameObject.tag == "Floor" && !onFloor)
@@ -160,24 +162,29 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.tag == "Coin")
         {
-            if (id <= 1)
-            {
-                ScoreVar.p1Score++;
-            } else
-            {
-                ScoreVar.p2Score++;
-            }
 
             if (PlayerSet.numPlayers > 1)
             {
-                SlowEnemy();
+                //SlowEnemy();
             }
             else
             {
                 GameManager.instance.TimeIncrease(5.0f);
             }
 
+            GameManager.instance.PlaySingle("Coin");
+            GameManager.instance.FX(collision.contacts[0].point);
+
             Destroy(collision.gameObject);
+
+            if (id <= 1)
+            {
+                ScoreVar.p1Score++;
+            }
+            else
+            {
+                ScoreVar.p2Score++;
+            }
 
             GameManager.instance.NewCoin();
         }
@@ -201,6 +208,8 @@ public class PlayerMove : MonoBehaviour
     {
         rb.AddForce((Vector3.up + direction) * 4f, ForceMode.Impulse);
         onFloor = false;
+
+        GameManager.instance.PlaySingle("Hit");
 
         anim.ResetTrigger("ground");
         anim.SetTrigger("hurt");

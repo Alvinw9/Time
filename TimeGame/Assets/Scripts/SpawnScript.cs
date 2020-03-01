@@ -17,6 +17,8 @@ public class SpawnScript : MonoBehaviour
         StartCoroutine(delayCoinSpawn());
         //PlayerMovement newPlayer1 = Instantiate(player1, new Vector3(1.0f, 1.5f, -2.0f), Quaternion.identity);
 
+        //print(twoPlayer);
+
         if (twoPlayer <= 1)
         {
             player2.gameObject.SetActive(false);
